@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:example_app/messages/counter_number.pb.dart';
 import 'package:example_app/messages/generated.dart';
 import 'package:flutter/material.dart';
 
@@ -52,12 +53,31 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
+          children: [
+            StreamBuilder(
+              stream: MyPreciousData.rustSignalStream,
+              builder: (context, snapshot) {
+                print(snapshot.data?.message.inputString);
+                final signan = snapshot.data;
+                if (signan != null && snapshot.connectionState == ConnectionState.active) {
+                  print(signan.message.inputString);
+                  return Text(signan.message.inputString);
+                }
+                print(snapshot);
+                return const SizedBox.shrink();
+              },
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                MyPreciousData1(
+                  inputNumbers: [3, 4, 5],
+                  inputString: 'Zero-cost abstraction',
+                ).sendSignalToRust(); // GENERATED
+              },
+              child: Text("Send a Signal from Dart to Rust"),
+            ),
+          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {},
-        child: const Icon(Icons.add),
       ),
     );
   }
