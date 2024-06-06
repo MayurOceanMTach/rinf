@@ -12,11 +12,11 @@ version = "0.1.0"
 crate-type = ["lib", "cdylib", "staticlib"]
 
 [dependencies]
-libvips = {path = "../libvips"}
+libvips = {path = "../../librarys/libvips"}
 prost = "0.12.3"
 rinf = "6.11.1"
 sample_crate = {path = "../sample_crate"}
 tokio = "1.38.0"
 # tokio_with_wasm = "0.4.4"
-vips-sys = {path = "../vips-sys"}
+vips-sys = {path = "../../librarys/vips-sys"}
 wasm-bindgen = "0.2.92"
